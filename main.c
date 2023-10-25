@@ -23,11 +23,6 @@ int main() {
     entrada = fopen("entrada.txt", "r");
     saida = fopen("saida.txt", "w");
 
-    if (entrada == NULL || saida == NULL) {
-        printf("Não foi possível abrir os arquivos.\n");
-        return 1;
-    }
-
     int numero;
     int matrizA[2][2], matrizB[2][2], matrizC[2][2];
 
