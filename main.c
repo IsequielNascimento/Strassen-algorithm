@@ -19,22 +19,53 @@ void strassen_multiply(int A[N][N], int B[N][N], int C[N][N]) {
 }
 
 int main() {
-    int A[N][N] = {{1, 2},
-                   {5,6}};
-    int B[N][N] = {{3, 4},
-                 {7,8}};
-    int C[N][N];
+    FILE *entrada, *saida;
+    entrada = fopen("entrada.txt", "r");
+    saida = fopen("saida.txt", "w");
 
-    strassen_multiply(A, B, C);
+    if (entrada == NULL || saida == NULL) {
+        printf("Não foi possível abrir os arquivos.\n");
+        return 1;
+    }
 
-    printf("Resultado da multiplicacao:\n");
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            printf("%d ", C[i][j]);
+    int numero;
+    int matrizA[2][2], matrizB[2][2], matrizC[2][2];
+
+    // Ler os números do arquivo e organizar em matrizes 2x2
+    while (fscanf(entrada, "%d", &numero) != EOF) {
+        matrizA[0][0] = numero;
+        fscanf(entrada, "%d", &numero);
+        matrizA[0][1] = numero;
+        fscanf(entrada, "%d", &numero);
+        matrizA[1][0] = numero;
+        fscanf(entrada, "%d", &numero);
+        matrizA[1][1] = numero;
+
+        fscanf(entrada, "%d", &numero);
+        matrizB[0][0] = numero;
+        fscanf(entrada, "%d", &numero);
+        matrizB[0][1] = numero;
+        fscanf(entrada, "%d", &numero);
+        matrizB[1][0] = numero;
+        fscanf(entrada, "%d", &numero);
+        matrizB[1][1] = numero;
+
+        // Aplicar o algoritmo de Strassen
+        strassen_multiply(matrizA, matrizB, matrizC);
+
+        // Exportar a matriz resultante para o arquivo de saída
+         fprintf(saida, "\n Resultado Matriz: \n");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                fprintf(saida, "%d ", matrizC[i][j]);
+            }
+            fprintf(saida, "\n");
         }
-        printf("\n");
-    };
-    //system("pause");
+       
+    }
+
+    fclose(entrada);
+    fclose(saida);
 
     return 0;
 }
