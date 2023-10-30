@@ -67,6 +67,7 @@ void strassen_multiply(int A[N][N], int B[N][N], int C[N][N]) {
         strassen_multiply(A21, B22, M7);
 
         // Calcula as submatrizes C usando a fórmula de Strassen
+        
         // C11
         add(M1, M2, temp1);
         subtract(temp1, M4, temp2);
