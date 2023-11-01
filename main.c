@@ -138,11 +138,10 @@ void strassen(int a[N][N], int b[N][N], int n, int strtmp[N][N]) {
 int main(int argc, char *argv[]) {
     /* Nesta parte, são declarados ponteiros de arquivo para abrir e manipular arquivos. São criados ponteiros para os arquivos de entrada entrada_A e entrada_B (leitura) e para os arquivos de saída matriz_A, matriz_B e saida (escrita).*/
     FILE *entrada_A, *entrada_B, *matriz_A, *matriz_B, *saida;
-    entrada_A = fopen("entrada_A.txt", "r");
-    entrada_B = fopen("entrada_B.txt", "r");
-    matriz_A = fopen("matrizA.txt", "w");
-    matriz_B = fopen("matrizB.txt", "w");
-    saida = fopen("saida.txt", "w");
+    entrada_A = fopen("entrada_A.txt", "r"); // Abre o arquivo entrada_A para leitura.
+    matriz_A = fopen("matrizA.txt", "w"); // Abre o arquivo matriz_A para escrita.
+    
+ 
 
     // declaração de variáveis de loop
     int i, j;
@@ -152,7 +151,7 @@ int main(int argc, char *argv[]) {
 
     //É solicitado ao usuário que insira o tamanho da matriz de potência 2 e armazena-o na variável tamanho_Matrix.
     printf("Tamanho da matriz :");
-    scanf("%d", &tamanho_Matrix);
+    scanf("%d", &tamanho_Matrix); // scanf("%d", &tamanho_Matrix);: Lê o tamanho da matriz e armazena-o em tamanho_Matrix.
 
 /* Nesses loops aninhados, o programa lê os valores da matriz A do arquivo entrada_A, armazena-os na matriz ae e os escreve no arquivo matriz_A. A variável count é incrementada para acompanhar a quantidade de valores lidos. */
 for (i = 0; i < tamanho_Matrix; i++) {
@@ -165,6 +164,8 @@ for (i = 0; i < tamanho_Matrix; i++) {
  fclose(entrada_A); // Fecha o arquivo entrada_A.
  fclose(matriz_A); // Fecha o arquivo matriz_A.
 
+entrada_B = fopen("entrada_B.txt", "r");
+matriz_B = fopen("matrizB.txt", "w");
 for (i = 0; i < tamanho_Matrix; i++) {
     for (j = 0; j < tamanho_Matrix; j++) {
         fscanf(entrada_B, "%d", &be[i][j]);  // Lê um valor do arquivo entrada_B e armazena em be[i][j].
@@ -175,6 +176,7 @@ for (i = 0; i < tamanho_Matrix; i++) {
 fclose(entrada_B); // Fecha o arquivo entrada_B.
 fclose(matriz_B); // Fecha o arquivo matriz_B.
     
+       saida = fopen("saida.txt", "w"); // Abre o arquivo saida para escrita.
     strassen(ae, be, tamanho_Matrix / 2, ce); /* strassen(ae, be, tamanho_Matrix / 2, ce): Chama a função strassen para multiplicar as matrizes ae e be e armazena o resultado na matriz ce.*/
 fprintf(saida, "Multiplicação das Matrizes\n");
 for (i = 0; i < tamanho_Matrix; i++) {
